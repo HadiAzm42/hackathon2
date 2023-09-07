@@ -6,7 +6,7 @@ let client: SanityClient = createClient({
     dataset: `${process.env.NEXT_PUBLIC_SANITY_DATASET}`,
     apiVersion: "2022-03-25",
     useCdn: false
-})
+});
 
 export async function GET() {
     try {
