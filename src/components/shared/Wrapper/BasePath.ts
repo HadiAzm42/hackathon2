@@ -1,4 +1,5 @@
-// const BASE_PATH_FORAPI = process.env.NEXT_PUBLIC_API_BASE_URL || "";
+const BASE_PATH_FORAPI = process.env.NODE_ENV === "development" ?
+    "http://localhost:3000"
+    : "https://hackathon2-tau.vercel.app"
 
-
-// export default BASE_PATH_FORAPI;
+export default BASE_PATH_FORAPI
