@@ -1,4 +1,4 @@
-import { heroGirlimg } from "@/components/assets"
+import heroGirlimg from "@/components/assets/images/Herogirlimg.png";
 import { BsCart2 } from "react-icons/bs"
 import Image from "next/image"
 
