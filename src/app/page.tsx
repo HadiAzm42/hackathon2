@@ -5,12 +5,18 @@ import ProductCarousel from "@/components/views/ProductCarousel"
 import BASE_PATH_FORAPI from "@/components/shared/Wrapper/BasePath";
 
 async function fetchAllProductsData() {
-  let res = await fetch(`${BASE_PATH_FORAPI}/api/products`);
-  if(!res.ok) {
-    throw new Error("Failed to fetch")
+  try {
+    let response = await fetch(`${BASE_PATH_FORAPI}/api/products`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch data');
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('API request error:', error);
+    throw error;
   }
-
-  return res.json();
+  
 }
 
 export default async function Home() {
