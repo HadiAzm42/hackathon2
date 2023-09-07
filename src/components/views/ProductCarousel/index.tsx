@@ -4,8 +4,7 @@ import { oneProductType } from "@/components/utils/ProductsDataArrayAndType"; //
 
 const ProductCarousel = ({ ProductData }: any) => {
     return (
-        <div>ProductCarousel
-        </div>
+        <div>{ProductData[0].productName}</div>
     )
 };
 
