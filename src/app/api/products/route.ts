@@ -1,22 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
-import { oneProductType } from "@/components/utils/ProductsDataArrayAndType";
+import { SanityClient, createClient } from "next-sanity";
 
-export async function GET(request: NextRequest) {
-    const orignalData: Array<oneProductType> = [];
-    const url = request.nextUrl.searchParams;
+let client: SanityClient = createClient({
+    projectId:`${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}`,
+    dataset: `${process.env.NEXT_PUBLIC_SANITY_DATASET}`,
+    apiVersion: "2022-03-25",
+    useCdn: false
+})
 
-    let res = await fetch(`https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v2021-06-07/data/query/production?query=*[_type == "products"]`);
-    let dataFrom_APi = await res.json();
-    orignalData.push(...dataFrom_APi.result)
-
-    if (url.has("start") || url.has("end")) {
-        if (orignalData[Number(url.get("start"))]) {
-            let productArray = orignalData.slice(Number(url.get("start")), Number(url.get("end")))
-            return NextResponse.json({ productArray })
-        }
-        return NextResponse.json({ productArray: "Not found" })
-
+export async function GET() {
+    try {
+        let response = await client.fetch(`*[_type == "products"]`)
+        console.log(response);
+        return NextResponse.json({response})
+    } catch (error) {
+        console.log((error as {message: string}).message );
+        return NextResponse.json({"Error": error})
     }
-
-    return NextResponse.json({ orignalData })
 };
