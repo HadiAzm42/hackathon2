@@ -1,8 +1,15 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { Maven_Pro } from 'next/font/google'
+import Navbar from "@/components/views/Navbar/index"
+import Wrapper from '@/components/shared/Wrapper'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Maven_Pro({
+  subsets: ['latin'],
+  weight: ["400", "500", "600", "700", "800", "900"]
+})
+
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -16,7 +23,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <Wrapper>
+        <Navbar />
+        {children}
+        </Wrapper></body>
     </html>
   )
 }
