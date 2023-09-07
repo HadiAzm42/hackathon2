@@ -4,11 +4,15 @@ import ProductsType from "@/components/views/ProductTypes";
 // import ProductCarousel from "@/components/views/ProductCarousel";
 // import BASE_PATH_FORAPI from "@/components/shared/Wrapper/BasePath";
 
-<div>
-<Hero />
-<ProductsType />
-{/* <ProductCarousel /> */}
-</div>
+export default function Home() {
+  return (
+    <div>
+      <Hero />
+      <ProductsType />
+      {/* <ProductCarousel /> */}
+    </div>
+  );
+}
 
 // ProductData={response} 
 
