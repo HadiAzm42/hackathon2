@@ -11,12 +11,22 @@ import { IoMdClose } from "react-icons/io"
 import { GiHamburgerMenu } from "react-icons/gi"
 import Expand from "@/components/views/Navbar/subComponents/Expand"
 import {useState} from 'react'
+import {useRouter} from 'next/navigation'
 
 
 
 const Navbar = () => {
+    const router = useRouter();
     const [isNavbarOpen, setNavbarOpen] = useState<boolean>(false);
     const [cartItemNumber, setcartNumber] = useState<number>(0);
+    const [searchQuery, setSearchQuery] = useState("");
+
+    function handleSerachCalledFunc(e: any) {
+        if (e.key === "Enter" && e.keyCode === 13) {
+            router.push(`/search/${searchQuery}`);
+        }
+    }
+    
     return (
         <div className='sticky backdrop-blur-lg bg-opacityDownColor top-0 bg-white z-50'>
             <div className="py-5 flex justify-between items-center space-x-12">
@@ -36,8 +46,15 @@ const Navbar = () => {
                 ))}
                 </ul>
                 <div className='border flex items-center text-gray-600 px-3 rounded-md'>
-                    <BiSearch />
-                    <input type="text" className='pl-1 pr-5 py-1 w-80 flex-grow' placeholder='Search In Our Store!' />
+                    <Link href={`/search/${searchQuery}`}><BiSearch /></Link>
+                    <input
+                                type="text"
+                                value={searchQuery}
+                                onKeyDown={handleSerachCalledFunc}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                className="focus:outline-none pl-1 pr-5 py-1 w-80 rounded-r-md"
+                                placeholder="Search in Our Store"
+                            />
                 </div>
                 <div className='flex-shrink-0 w-11 h-11 bg-gray-300 rounded-full flex items-center justify-center'><div className='w-4 h-4 absolute top-5 bg-red-400 text-xs font-light rounded-full flex justify-center items-center'>{cartItemNumber}</div><BsCart2  size={24}/></div>
                 </div>
