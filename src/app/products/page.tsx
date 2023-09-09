@@ -1,29 +1,34 @@
-import BASE_PATH_FORAPI from "@/components/shared/Wrapper/BasePath"
+import BASE_PATH_FORAPI from "@/components/shared/Wrapper/BasePath";
 import AllProductsCompo from "@/components/views/AllProduct";
+import { useEffect, useState } from "react";
 
-async function fetchAllProductData() {
-    try {
-        let res = await fetch(`${BASE_PATH_FORAPI}/api/products?start=0&end=10`, {
-            next: {
-                revalidate: 120
-            }
+const Products = () => {
+  const [productData, setProductData] = useState({ productArray: [] });
+
+  useEffect(() => {
+    const fetchAllProductData = async () => {
+      try {
+        const res = await fetch(`${BASE_PATH_FORAPI}/api/products?start=0&end=10`, {
+          next: {
+            revalidate: 120,
+          },
         });
         if (!res.ok) {
-            throw new Error("Failed to fetch data");
+          throw new Error("Failed to fetch data");
         }
-        return res.json();
-    } catch (error) {
+        const data = await res.json();
+        setProductData(data);
+      } catch (error) {
         console.error("Error fetching data:", error);
         // Handle the error gracefully, e.g., show an error message to the user.
-        return { productArray: [] }; // Return an empty array or handle it as needed.
-    }
-}
+        setProductData({ productArray: [] }); // Return an empty array or handle it as needed.
+      }
+    };
 
-const Products = async () => {
-    const ProductData = await fetchAllProductData()
-    return (
-<AllProductsCompo ProductData={ProductData} />
-    )
-}
+    fetchAllProductData();
+  }, []);
 
-export default Products
+  return <AllProductsCompo productArray={productData.productArray} />;
+};
+
+export default Products;
