@@ -1,3 +1,5 @@
+"use Client"
+
 import BASE_PATH_FORAPI from "@/components/shared/Wrapper/BasePath";
 import AllProductsCompo from "@/components/views/AllProduct";
 import { useEffect, useState } from "react";
