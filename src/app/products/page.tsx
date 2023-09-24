@@ -1,5 +1,6 @@
 import BASE_PATH_FORAPI from "@/components/shared/Wrapper/BasePath"
 import AllProductsCompo from "@/components/views/AllProduct";
+import Footer from "@/components/views/Footer";
 
 async function fetchAllProductData() {
     let res = await fetch(`${BASE_PATH_FORAPI}/api/products?start=0&end=10`, {
@@ -21,4 +22,5 @@ const Products = async () => {
     )
 }
 
+{/* <Footer /> */}
 export default Products

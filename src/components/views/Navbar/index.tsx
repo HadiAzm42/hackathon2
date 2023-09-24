@@ -46,7 +46,7 @@ const Navbar = () => {
                 ))}
                 </ul>
                 <div className='border flex items-center text-gray-600 px-3 rounded-md'>
-                    <Link href={`/search/${searchQuery}`}><BiSearch /></Link>
+                    <Link href={`/${searchQuery}`}><BiSearch /></Link>
                     <input
                                 type="text"
                                 value={searchQuery}
